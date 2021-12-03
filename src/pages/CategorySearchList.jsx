@@ -2,28 +2,17 @@ import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Report } from "@material-ui/icons";
 import { Store } from "../context/store";
 import { toast } from "react-toastify";
-import { useContext,useMemo,useState } from "react";
+import { useContext, useEffect } from "react";
 import Counter from "../components/Counter";
 import LoadingSpinner from "../components/LoadingSpinner";
-import Paginate from '../components/Paginate'
-let PageSize = 8;
+import { FETCH_PRODUCTS_BY_CATEGORY } from "../utils/Graphql";
+import { useQuery } from "@apollo/react-hooks";
+
 export default function Example() {
-  const { dispatch,state } = useContext(Store);
-  const [currentPage, setCurrentPage] = useState(1);
-  const currentData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
-    const lastPageIndex = firstPageIndex + PageSize;
-    if(state.productList &&state.productList.length>1){
-      return state.productList &&state.productList.slice(firstPageIndex, lastPageIndex); 
-   
-    }
-    if(state.productList &&state.productList.length<=1){
-      return state.productList &&state.productList  
-    }
-     
-  }, [currentPage,state?.productList]);
-
-
+  const { dispatch, state } = useContext(Store);
+  const { loading, data } = useQuery(FETCH_PRODUCTS_BY_CATEGORY, {
+    variables: { category: state.category },
+  });
   const navigate = useNavigate();
   const handleViewProduct = (product) => {
     dispatch({ type: "GET_PRODUCT", payload: product });
@@ -35,43 +24,58 @@ export default function Example() {
   const handleAddToCart = (item) => {
     toast.dismiss();
     dispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity: 1 } });
-    toast.success(`${item.name} has been added to your cart!`);
+    toast.success(`${item.name} added to cart`);
     console.log(state.cart);
   };
-  console.log(state.productList);
   const subtractHandler = (item) => {
     dispatch({ type: "CART_SUBTRACT_ITEM", payload: item });
   };
-  if (
-    state.productListLoading ||
-    !state.productList ||
-    (state.productListLoading && state.productList)
-  ) {
+
+  useEffect(() => {
+    if (data) {
+      console.log(data);
+
+      dispatch({
+        type: "CATEGORY_SEARCH",
+        payload: data.getProductByCategory,
+      });
+      dispatch({ type: "CATEGORY_SEARCH_LOADING", payload: loading });
+    }
+  }, [data, loading, dispatch]);
+  if (state.categoryLoading || !state.categorySearch) {
     return (
-      <div className="mx-auto my-10">
+      <div className="mx-auto my-56">
         <LoadingSpinner height={"32"} width={"32"} />
       </div>
     );
   }
-
- else if (state.productList <= 0) {
+ else if (state.categorySearch <= 0) {
     return (
-      <h1 className="flex items-center py-5 justify-center align-middle text-primary text-3xl font-bold h-full">
+      <h1 className="flex items-center py-56 justify-center align-middle text-primary text-3xl font-bold h-full">
         No product found
       </h1>
     );
   }
-   
-
-
+ else if (!state.categoryLoading && !state.categorySearch) {
     return (
-      <div className="bg-white" id='productlist'>
+      <h1
+        onClick={() => navigate("/")}
+        className="flex cursor-pointer items-center py-56 hover:text-secondary justify-center align-middle text-primary text-3xl font-bold h-full"
+      >
+        Go Back Home
+      </h1>
+    );
+  }
+ 
+ else
+    return (
+      <div className="bg-white">
         <div className=" mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-heading font-bold text-gray-800">
             Browse Our Products
           </h2>
           <div className="mt-8 grid grid-cols-1 gap-y-12 sm:grid-cols-2 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8">
-            {currentData&&currentData.map((product, i) => (
+            {state.categorySearch.map((product, i) => (
               <div key={product.id} className="shadow-md p-2">
                 <div
                   className="relative"
@@ -90,7 +94,7 @@ export default function Example() {
                     </h3>
                     <p className="relative text-sm font-semibold text--gray-900">
                       {product.location === "UK"
-                        ? `€${product.price}`
+                        ? `$${product.price}`
                         : `N${product.price}`}
                     </p>
                   </div>
@@ -107,7 +111,7 @@ export default function Example() {
                       }
                     />
                   </div>
-                ) : product.inStock === true ? (
+                ) : product.inStock ? (
                   <div
                     className="mt-6"
                     onClick={() => handleAddToCart(product)}
@@ -135,13 +139,6 @@ export default function Example() {
               </div>
             ))}
           </div>
-          <Paginate
-        className="flex items-center justify-center"
-        currentPage={currentPage}
-        totalCount={state.productList.length}
-        pageSize={PageSize}
-        onPageChange={page => setCurrentPage(page)}
-      />
         </div>
       </div>
     );

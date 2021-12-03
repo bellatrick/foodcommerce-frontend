@@ -1,25 +1,92 @@
-import { Fragment, useState } from "react";
+import { Fragment, useState, useContext } from "react";
 import SearchInput from "./SearchInput";
 import { Popover, Transition } from "@headlessui/react";
 import { ShoppingCart, ExpandMore } from "@material-ui/icons";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Uk from "../assets/Uk.png";
 import Nig from "../assets/Nigeria.png";
-import { ChevronDownIcon } from "@heroicons/react/solid";
+import { useNavigate } from "react-router-dom";
+import { Store } from "../context/store";
+import {
+  FETCH_CATEGORIES,
+  FETCH_PRODUCTS_BY_SEARCH,
+  FETCH_PRODUCTS_BY_LOCATION,
+  FETCH_SHIPPING,
+} from "../utils/Graphql";
+import { useQuery } from "@apollo/react-hooks";
 
-export default function Example() {
+import { useEffect } from "react";
+export default function Example(props) {
+  const {loading:loadingCat, data: categoryData } = useQuery(FETCH_CATEGORIES);
   const [local, setLocal] = useState(true);
+  const [keyword, setKeyword] = useState("");
+  const [category, setCategory] = useState("Category");
+  const { data: shippingData } = useQuery(FETCH_SHIPPING);
+  const { loading, data } = useQuery(FETCH_PRODUCTS_BY_LOCATION, {
+    variables: { location: local ? "Nigeria" : "UK" },
+  });
+  const { loading: searchLoading, data: searchData } = useQuery(
+    FETCH_PRODUCTS_BY_SEARCH,
+    {
+      variables: { keyword },
+    }
+  );
+
+  const { state, dispatch } = useContext(Store);
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
   const handleToggleOpen = () => {
     setOpen(!open);
   };
+  const handleToggleLocal = () => {
+    setLocal(!local);
+  };
+  const handleViewCart = () => {
+    navigate("/cart");
+  };
+  const handleGoHome = () => {
+    navigate("/");
+   
+  };
+  const handleSearchProduct = (e) => {
+    e.preventDefault();
+    keyword.trim().length>0 &&  navigate(`/search`);
+    if (searchData) {
+    
+      dispatch({
+        type: "GET_SEARCH_LIST",
+        payload: searchData.filterProductBySearch,
+      });
+      dispatch({ type: "PRODUCT_SEARCH_LOADING", payload: searchLoading });
+     
+    }
+  };
+
+  useEffect(() => {
+    if (shippingData) {
+      dispatch({ type: "GET_SHIPPING", payload: shippingData.getShipping[0] });
+    }
+    if (categoryData) {
+      dispatch({ type: "GET_CATEGORIES", payload: categoryData.getCategory });
+      dispatch({type:'CATEGORY_PREVIEW_LOADING',payload:loadingCat})
+    }
+      if (data) {
+        dispatch({
+          type: "GET_PRODUCT_LIST",
+          payload: data.getProductByLocation,
+        });
+        dispatch({ type: "PRODUCT_LIST_LOADING", payload: loading });
+      }
+    
+  }, [dispatch, categoryData, data, loading, shippingData,loadingCat]);
   return (
     <>
-      <Popover className="relative bg-secondary shadow">
+      <Popover className="top-0 left-0 z-10 bg-secondary shadow sticky">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center py-2 md:justify-start md:space-x-10">
-            <div className="hidden md:flex justify-start lg:w-0 lg:flex-1">
-              <div>
+            <div onClick={handleGoHome} className="hidden md:flex justify-start lg:w-0 lg:flex-1">
+              <div >
                 <span className="sr-only">Workflow</span>
                 <img
                   className="h-8 w-auto sm:h-10"
@@ -35,9 +102,15 @@ export default function Example() {
               </Popover.Button>
             </div>
             <div className="hidden md:block">
-              <SearchInput />
+              <SearchInput
+                setCategory={setCategory}
+                category={category}
+                handleSearchProduct={handleSearchProduct}
+                keyword={keyword}
+                setKeyword={setKeyword}
+              />
             </div>
-            <div className=" md:flex items-center justify-end md:flex-1 lg:w-0">
+            <div className=" cursor-pointer md:flex items-center justify-end md:flex-1 lg:w-0">
               <div
                 className="relative hidden md:block"
                 onClick={handleToggleOpen}
@@ -54,22 +127,27 @@ export default function Example() {
                     <p className=" text-white text-sm mr-4">Shop In Nigeria</p>
                   </div>
                 ) : (
-                  <div>
-                    <div>
+                  <div className="flex flex-col items-center align-middle mr-10">
+                    <div className="text-sm text-white flex items-center ">
                       {" "}
                       <img src={Uk} alt="flag" />
-                      <ChevronDownIcon />
+                      <span className="text-sm w-16">
+                        <ExpandMore />
+                      </span>
                     </div>
-                    <p>Shop In UK</p>
+                    <p className=" text-white text-sm mr-10">Shop In UK</p>
                   </div>
                 )}
                 {open ? (
                   <div
-                    className="z-10 w-48 absolute top-10 -left-10 p-3 rounded-2xl bg-white"
+                    className="z-10 w-48 absolute top-10 -left-10 p-3 rounded-2xl bg-white border border-primary"
                     onClick={() => setOpen(false)}
                   >
                     {!local ? (
-                      <div className="flex items-center">
+                      <div
+                        onClick={handleToggleLocal}
+                        className="flex cursor-pointer items-center"
+                      >
                         <img src={Nig} alt="flag" />
 
                         <p className="text-sm ml-3 font-bold">
@@ -77,7 +155,10 @@ export default function Example() {
                         </p>
                       </div>
                     ) : (
-                      <div className="flex items-center">
+                      <div
+                        onClick={handleToggleLocal}
+                        className="flex cursor-pointer items-center"
+                      >
                         <img src={Uk} alt="flag" />
 
                         <p className="text-sm ml-3 font-bold">Shop In UK</p>
@@ -88,12 +169,15 @@ export default function Example() {
                   ""
                 )}
               </div>
-              <div className="flex items-center">
-                <div className="whitespace-nowrap text-base font-medium text-gray-100 hover:text-gray-300">
+              <div
+                onClick={handleViewCart}
+                className="flex cursor-pointer items-center"
+              >
+                <div className="whitespace-nowrap text-base font-medium text-gray-50 cursor-pointer hover:text-gray-100">
                   <ShoppingCart style={{ height: "30px", width: "30px" }} />
                 </div>
                 <p className="ml-8 whitespace-nowrap inline-flex items-center justify-center border border-transparent h-8 w-8 rounded-full shadow-sm text-base font-medium text-white bg-gray-900 hover:bg-green-700">
-                  0
+                  {state.cart.length}
                 </p>
               </div>
             </div>
@@ -116,7 +200,7 @@ export default function Example() {
             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-primary divide-y-2 divide-green-600">
               <div className="pt-5 mb-6 px-5">
                 <div className="flex items-center justify-between">
-                  <div>
+                  <div onClick={handleGoHome}>
                     <img
                       className="h-8 w-auto"
                       src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
@@ -133,10 +217,8 @@ export default function Example() {
               </div>
               <div className="py-6  space-y-6">
                 <div className="grid grid-cols-1 gap-y-4 gap-x-8">
-               
-  
                   <div
-                    className="relative "
+                    className="relative cursor-pointer "
                     onClick={handleToggleOpen}
                   >
                     {local ? (
@@ -154,17 +236,17 @@ export default function Example() {
                       </div>
                     ) : (
                       <div className="flex items-center align-middle mr-10 px-16">
-                      <div className="text-sm text-white flex items-center ">
-                        {" "}
-                        <img src={Uk} alt="flag" />
-                        <span className="text-sm w-16">
-                          <ExpandMore />
-                        </span>
+                        <div className="text-sm text-white flex items-center ">
+                          {" "}
+                          <img src={Uk} alt="flag" />
+                          <span className="text-sm w-16">
+                            <ExpandMore />
+                          </span>
+                        </div>
+                        <p className=" text-white text-base font-bold mr-4">
+                          Shop In UK
+                        </p>
                       </div>
-                      <p className=" text-white text-base font-bold mr-4">
-                        Shop In  UK
-                      </p>
-                    </div>
                     )}
                     {open ? (
                       <div
@@ -172,7 +254,10 @@ export default function Example() {
                         onClick={() => setOpen(false)}
                       >
                         {!local ? (
-                          <div className="flex items-center">
+                          <div
+                            onClick={handleToggleLocal}
+                            className="flex items-center"
+                          >
                             <img src={Nig} alt="flag" />
 
                             <p className="text-sm ml-3 font-bold">
@@ -180,7 +265,10 @@ export default function Example() {
                             </p>
                           </div>
                         ) : (
-                          <div className="flex items-center">
+                          <div
+                            onClick={handleToggleLocal}
+                            className="flex items-center"
+                          >
                             <img src={Uk} alt="flag" />
 
                             <p className="text-sm ml-3 font-bold">Shop In UK</p>
@@ -192,10 +280,10 @@ export default function Example() {
                     )}
                   </div>
                 </div>
-                <div className='border border-t-2 border-green-600'/>
+                <div className="border border-t-2 border-green-600" />
                 <div className="mb-32 px-16">
-                    <SearchInput />
-                  </div>
+                  <SearchInput />
+                </div>
               </div>
             </div>
           </Popover.Panel>
