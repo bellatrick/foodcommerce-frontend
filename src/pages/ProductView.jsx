@@ -5,7 +5,6 @@ import { ShoppingCart, Report } from "@material-ui/icons";
 import Counter from "../components/Counter";
 import {toast} from 'react-toastify'
 import { useNavigate } from "react-router-dom";
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -34,7 +33,7 @@ const {dispatch,state} =useContext(Store)
   }
   else
   return (
-    <div className="bg-white">
+    <div className="bg-white relative">
       <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:gap-x-8 lg:items-start">
           {/* Image gallery */}
@@ -138,7 +137,9 @@ const {dispatch,state} =useContext(Store)
             </form>
           </div>
         </div>
+      
       </div>
+      
     </div>
   );
 }

@@ -16,7 +16,7 @@ export default function CategoryPreview() {
   };
   if(state.categoryPreviewLoading || !state.categories){
      return (
-    <div className="mx-auto my-16">
+    <div className="mx-auto my-40">
       <LoadingSpinner height={"16"} width={"16"} />
     </div>
   );
@@ -69,7 +69,7 @@ export default function CategoryPreview() {
         </div>
 
         <div className="mt-6 px-4 sm:hidden">
-          <div className="block cursor-pointer text-sm font-semibold text-black hover:text-primary">
+          <div  onClick={handleViewCategory} className="block cursor-pointer text-sm font-semibold text-black hover:text-primary">
             Browse all categories<span aria-hidden="true"> &rarr;</span>
           </div>
         </div>

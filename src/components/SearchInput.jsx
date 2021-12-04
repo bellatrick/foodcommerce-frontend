@@ -1,9 +1,9 @@
 import {  SearchIcon } from '@heroicons/react/solid'
-
+import {Store} from '../context/store'
 import Dropdown from './Dropdown'
-
+import {useContext} from 'react'
 export default function Example({keyword,setKeyword,setCategory,handleSearchProduct,category}) {
- 
+ const {dispatch}=useContext(Store)
     return (
       <div>
         <form onSubmit={handleSearchProduct} className=" flex relative rounded-md shadow-sm">
@@ -12,7 +12,8 @@ export default function Example({keyword,setKeyword,setCategory,handleSearchProd
           </div>
           <input
             type="text"
-            onChange={(e)=>setKeyword(e.target.value)}
+            onChange={(e)=>{setKeyword(e.target.value)
+            dispatch({type:'SET_KEYWORD',payload:e.target.value })}}
             name="company-website"
             value={keyword}
             id="company-website"

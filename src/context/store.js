@@ -9,19 +9,25 @@ const initalState = {
   productList: null,
   filteredList: null,
   categorySearch: null,
-  categories: [],
+  categories: null,
   category: "",
   productListLoading: false,
   productSearchLoading: false,
   categoryLoading: false,
-  shippingData: {},
+  shippingData: null,
   categoryPreviewLoading: false,
+  local: "Nigeria",
+  keyword:''
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
     case "GET_SHIPPING":
       return { ...state, shippingData: action.payload };
+    case "SET_LOCAL":
+      return { ...state, local: action.payload === false ? "Nigeria" : "UK" };
+      case 'SET_KEYWORD':
+        return{...state, keyword:action.payload}
     case "CATEGORY_PREVIEW_LOADING":
       return { ...state, categoryPreviewLoading: action.payload };
     case "CATEGORY_SEARCH":

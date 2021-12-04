@@ -8,7 +8,7 @@ import Cart from './pages/Cart'
 import CategoryView from './pages/CategoryView'
 import { ToastContainer } from "react-toastify";
 import NavSection from "./components/NavSection";
-import Footer from "./components/Footer";
+
 import SearchList from './pages/SearchList'
 import CategorySearch from './pages/CategorySearchList'
 function App() {
@@ -38,7 +38,7 @@ function App() {
         draggable
         pauseOnHover
       />
-       <Footer />
+   
     </StoreProvider>
   );
 }

@@ -62,7 +62,7 @@ const ContactForm = () => {
         <Textarea value={form.message} onChange={handleChange} />
         <button
           type="submit"
-          className=" font-bold bg-primary tracking-widest rounded-2xl px-2 py-2 w-64  text-base mt-10 mx-auto hover:bg-gray-900 cursor-pointer text-white hover:text-green-50 sm:block"
+          className=" font-bold flex justify-center bg-primary tracking-widest rounded-2xl px-2 py-2 w-64  text-base mt-10 mx-auto hover:bg-gray-900 cursor-pointer text-white hover:text-green-50 sm:block"
         >
           {loading ? <LoadingSpinner height={"6"} width={"5"} /> : "Submit"}
           <span aria-hidden="true"></span>

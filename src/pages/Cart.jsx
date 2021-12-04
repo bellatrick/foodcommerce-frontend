@@ -5,6 +5,7 @@ import Counter from "../components/Counter";
 import Modal from "../components/Modal";
 import { ShoppingCart } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
+import Footer from '../components/Footer'
 export default function Example() {
   const navigate=useNavigate()
   const { dispatch, state } = useContext(Store);
@@ -189,14 +190,14 @@ export default function Example() {
                   <dt className="text-base font-medium text-gray-900">
                     Order total
                   </dt>
-                  <dd className="text-base font-medium text-gray-900">
+                {state.shippingData?  <dd className="text-base font-medium text-gray-900">
                     N{" "}
                     {state.cart
                       .filter((item) => item.location === "Nigeria")
                       .filter((item) => item.inStock === true)
                       .reduce((a, c) => a + c.price * c.quantity, 0) +
                       +state.shippingData?.nigeriaToUK?.substring(1)}
-                  </dd>
+                  </dd>:'Network is unavailable '}
                 </div>
               </dl>
               <div>
@@ -214,13 +215,13 @@ export default function Example() {
                     <dl className="mt-6 space-y-4">
                       <div className="flex items-center justify-between">
                         <dt className="text-sm text-gray-600">Subtotal</dt>
-                        <dd className="text-sm font-medium text-gray-900">
+                     {state.shippingData?   <dd className="text-sm font-medium text-gray-900">
                         €{" "}
                           {state.cart
                             .filter((item) => item.location === "UK")
                             .filter((item) => item.inStock === true)
                             .reduce((a, c) => a + c.price * c.quantity, 0)}
-                        </dd>
+                        </dd>:'Netowrk error'}
                       </div>
                       <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                         <dt className="flex items-center text-sm text-gray-600">
@@ -236,14 +237,14 @@ export default function Example() {
                         <dt className="text-base font-medium text-gray-900">
                           Order total
                         </dt>
-                        <dd className="text-base font-medium text-gray-900">
+                      {state.shippingData?  <dd className="text-base font-medium text-gray-900">
                         €{" "}
                           {state.cart
                             .filter((item) => item.location === "UK")
                             .filter((item) => item.inStock === true)
                             .reduce((a, c) => a + c.price * c.quantity, 0) +
                             +state.shippingData.uKToNigeria?.substring(1)}
-                        </dd>
+                        </dd>:'Network is unavailable'}
                       </div>
                     </dl>
                   </div>
@@ -273,6 +274,7 @@ export default function Example() {
         no2={no2}
         message={messageStr}
       />
+      <Footer/>
     </div>
   );
 }

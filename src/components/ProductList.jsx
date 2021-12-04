@@ -38,7 +38,7 @@ export default function Example() {
     toast.success(`${item.name} has been added to your cart!`);
     console.log(state.cart);
   };
-  console.log(state.productList);
+ 
   const subtractHandler = (item) => {
     dispatch({ type: "CART_SUBTRACT_ITEM", payload: item });
   };

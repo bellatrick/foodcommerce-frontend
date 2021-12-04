@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { Store } from "../context/store";
 import {
   FETCH_CATEGORIES,
-  FETCH_PRODUCTS_BY_SEARCH,
+ 
   FETCH_PRODUCTS_BY_LOCATION,
   FETCH_SHIPPING,
 } from "../utils/Graphql";
@@ -25,12 +25,7 @@ export default function Example(props) {
   const { loading, data } = useQuery(FETCH_PRODUCTS_BY_LOCATION, {
     variables: { location: local ? "Nigeria" : "UK" },
   });
-  const { loading: searchLoading, data: searchData } = useQuery(
-    FETCH_PRODUCTS_BY_SEARCH,
-    {
-      variables: { keyword },
-    }
-  );
+ 
 
   const { state, dispatch } = useContext(Store);
   const navigate = useNavigate();
@@ -41,6 +36,7 @@ export default function Example(props) {
   };
   const handleToggleLocal = () => {
     setLocal(!local);
+    dispatch({type:'SET_LOCAL', payload:local})
   };
   const handleViewCart = () => {
     navigate("/cart");
@@ -52,15 +48,7 @@ export default function Example(props) {
   const handleSearchProduct = (e) => {
     e.preventDefault();
     keyword.trim().length>0 &&  navigate(`/search`);
-    if (searchData) {
-    
-      dispatch({
-        type: "GET_SEARCH_LIST",
-        payload: searchData.filterProductBySearch,
-      });
-      dispatch({ type: "PRODUCT_SEARCH_LOADING", payload: searchLoading });
-     
-    }
+  
   };
 
   useEffect(() => {
@@ -250,7 +238,7 @@ export default function Example(props) {
                     )}
                     {open ? (
                       <div
-                        className="z-10 w-48 absolute top-10 left-20 p-3 rounded-2xl bg-white"
+                        className="z-10 w-48 absolute top-10 left-20 p-3 rounded-2xl bg-secondary text-white"
                         onClick={() => setOpen(false)}
                       >
                         {!local ? (

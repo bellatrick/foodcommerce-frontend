@@ -3,6 +3,7 @@ import {Store} from '../context/store'
 import {useContext} from 'react'
 import {useNavigate} from 'react-router-dom'
 
+import LoadingSpinner from "../components/LoadingSpinner";
 export default function ProductList() {
   const navigate=useNavigate()
 const {state,dispatch}=useContext(Store)
@@ -10,8 +11,21 @@ const handleViewProducts = async (category) => {
   dispatch({ type: "SET_CATEGORY", payload: category });
   navigate("/categorysearch");
 };
+if(!state.categoryPreviewLoading && !state.categories){
   return (
-    <div className="bg-white">
+    <h1 onClick={()=>navigate('/')} className=" cursor-pointer flex items-center py-56 hover:text-secondary justify-center align-middle text-primary text-3xl font-bold h-full">
+     No Category Selected. Go Back Home
+    </h1>
+  )}
+if(state.categoryPreviewLoading || !state.categories){
+  return (
+ <div className="mx-auto my-64">
+   <LoadingSpinner height={"16"} width={"16"} />
+ </div>
+);
+}
+  return (
+    <div className="bg-white relative">
       <div className=" py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <h2 className="text-3xl text-start  font-extrabold font-heading tracking-tight text-gray-900">
           Categories
@@ -37,6 +51,7 @@ const handleViewProducts = async (category) => {
                 </div>
       
       </div>
+  
     </div>
   );
 }
