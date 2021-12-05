@@ -19,7 +19,7 @@ if(!state.categoryPreviewLoading && !state.categories){
   )}
 if(state.categoryPreviewLoading || !state.categories){
   return (
- <div className="mx-auto my-64">
+ <div className="mx-auto my-16 sm:my-32">
    <LoadingSpinner height={"16"} width={"16"} />
  </div>
 );

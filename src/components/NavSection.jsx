@@ -270,7 +270,13 @@ export default function Example(props) {
                 </div>
                 <div className="border border-t-2 border-green-600" />
                 <div className="mb-32 px-16">
-                  <SearchInput />
+                <SearchInput
+                setCategory={setCategory}
+                category={category}
+                handleSearchProduct={handleSearchProduct}
+                keyword={keyword}
+                setKeyword={setKeyword}
+              />
                 </div>
               </div>
             </div>

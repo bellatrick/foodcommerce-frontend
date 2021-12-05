@@ -44,7 +44,7 @@ export default function Example() {
   }, [data, loading, dispatch]);
   if (loading || !state.categorySearch) {
     return (
-      <div className="mx-auto my-56">
+      <div className="mx-auto my-16 sm:my-32">
         <LoadingSpinner height={"32"} width={"32"} />
       </div>
     );
