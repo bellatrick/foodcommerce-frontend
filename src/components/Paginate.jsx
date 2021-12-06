@@ -40,7 +40,7 @@ const Pagination = props => {
     >
        {/* Left navigation arrow */}
       <li
-       className={`${currentPage === 1?' ':'text-white bg-gray-800 '}rounded-full mr-2 text-base font-bold px-1 hover:bg-primary`}
+       className={`${currentPage === 1?' bg-transparent hover:bg-transparent text-transparent':'text-white bg-gray-800 '}rounded-full mr-2 text-base font-bold px-1 hover:bg-primary`}
         onClick={onPrevious}
         disable={currentPage===1}
       >
@@ -65,7 +65,7 @@ const Pagination = props => {
       })}
       {/*  Right Navigation arrow */}
       <li
-      className={`${currentPage === lastPage?'bg-primary':'bg-gray-800 '}rounded-full px-1 text-white hover:bg-primary`}
+      className={`${currentPage === lastPage?'bg-transparent hover:bg-transparent':'bg-gray-800 '}rounded-full px-1 text-white hover:bg-primary`}
         onClick={onNext}
       >
         <ArrowForward/>

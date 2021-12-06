@@ -32,19 +32,19 @@ export default function Example() {
       UKItems.length > 0
         ? UKItems.map(
             (item, i) =>
-              ` __Item name__: ${item.name} __quantity__:${item.quantity} __price__:${item.price} `
+              ` Item name__: ${item.name} -quantity__:${item.quantity} -price__:${item.price} `
           )
         : ""
     } ${
       NigeriaItems.length > 0
         ? NigeriaItems.map(
             (item, i) =>
-              `__Item name__: ${item.name} __quantity__:${item.quantity} __price__:${item.price} `
+              `Item name__: ${item.name} -quantity__:${item.quantity} -price__:${item.price} `
           )
         : ""
     } Total amount of purchased item is ${
-      nigTotal ? ` N${nigTotal} (items from Nigeria)` : ""
-    } ${UKTotal ? `€ ${UKTotal} (Items from the UK)` : ""}`;
+      nigTotal ? `(items from Nigeria) N${nigTotal} ` : ""
+    } ${UKTotal ? `and (Items from the UK) € ${UKTotal} ` : ""}`;
     setMessage(message);
   }, [state.cart]);
 

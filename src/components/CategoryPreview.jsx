@@ -17,7 +17,7 @@ export default function CategoryPreview() {
   if(state.categoryPreviewLoading || !state.categories){
      return (
     <div className="mx-auto my-40">
-      <LoadingSpinner height={"16"} width={"16"} />
+      <LoadingSpinner height={"32"} width={"32"} />
     </div>
   );
   }
@@ -41,7 +41,7 @@ export default function CategoryPreview() {
           <div className="-my-2">
             <div className="box-content py-2 relative h-80 overflow-x-auto xl:overflow-visible scrollbar-hide">
               <div className="absolute min-w-screen-xl  px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8">
-                {state.categories.map((category, i) => (
+                {state.categories.slice(0,5).map((category, i) => (
                   <div
                     key={i}
                     onClick={() => handleViewProducts(category.name)}
