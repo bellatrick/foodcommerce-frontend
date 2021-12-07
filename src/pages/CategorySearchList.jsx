@@ -42,10 +42,12 @@ export default function Example() {
       dispatch({ type: "CATEGORY_SEARCH_LOADING", payload: loading });
     }
   }, [data, loading, dispatch]);
+
   if (loading || !state.categorySearch) {
     return (
-      <div className="mx-auto my-16 sm:my-32">
-        <LoadingSpinner height={"32"} width={"32"} />
+      <div className="mx-auto my-16 sm:my-32 text-9xl text-black">
+        {/* <LoadingSpinner height={"32"} width={"32"} /> */}
+        loading
       </div>
     );
   } else if (!loading && !state.categorySearch) {
