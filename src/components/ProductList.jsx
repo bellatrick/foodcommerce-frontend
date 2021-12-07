@@ -4,7 +4,8 @@ import { Store } from "../context/store";
 import { toast } from "react-toastify";
 import { useContext,useMemo,useState } from "react";
 import Counter from "../components/Counter";
-import LoadingSpinner from "../components/LoadingSpinner";
+import Loader from "react-loader-spinner";
+
 import Paginate from '../components/Paginate'
 let PageSize = 8;
 export default function Example() {
@@ -48,9 +49,15 @@ export default function Example() {
     (state.productListLoading && state.productList)
   ) {
     return (
-      <div className="mx-auto my-10">
-        <LoadingSpinner height={"32"} width={"32"} />
-      </div>
+      <div className="mx-auto mt-32 flex items-center justify-center">
+      <Loader
+        type="Puff"
+        color="#31C9AE"
+        height={100}
+        width={100}
+        timeout={5000}
+      />
+    </div>
     );
   }
 

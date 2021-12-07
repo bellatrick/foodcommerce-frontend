@@ -4,7 +4,7 @@ import { Store } from "../context/store";
 import { toast } from "react-toastify";
 import { useContext, useEffect } from "react";
 import Counter from "../components/Counter";
-import LoadingSpinner from "../components/LoadingSpinner";
+import Loader from "react-loader-spinner";
 import { FETCH_PRODUCTS_BY_CATEGORY } from "../utils/Graphql";
 import { useQuery } from "@apollo/react-hooks";
 
@@ -45,9 +45,15 @@ export default function Example() {
   
   if (loading || !state.categorySearch) {
     return (
-      <div className="mx-auto my-16 sm:my-32">
-        <LoadingSpinner height={"32"} width={"32"} />
-      </div>
+      <div className="mx-auto mt-32 flex items-center justify-center">
+      <Loader
+        type="Puff"
+        color="#31C9AE"
+        height={100}
+        width={100}
+        timeout={5000}
+      />
+    </div>
     );
   } else if (!loading && !state.categorySearch) {
     return (

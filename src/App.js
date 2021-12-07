@@ -6,10 +6,11 @@ import "./App.css";
 import { ToastContainer } from "react-toastify";
 import NavSection from "./components/NavSection";
 import NotFound from "./pages/NotFound";
-import LoadingSpinner from "./components/LoadingSpinner";
+import Loader from "react-loader-spinner";
 import CategoryView from './pages/CategoryView'
 import CategorySearch from './pages/CategorySearchList'
 import SearchList from './pages/SearchList'
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 const Home = React.lazy(() => import("./pages/Home"));
 const ProductView = React.lazy(() => import("./pages/ProductView"));
 const Cart = React.lazy(() => import("./pages/Cart"));
@@ -20,9 +21,15 @@ function App() {
       <Router>
         <Suspense
           fallback={
-            <div data-testid="spin" className="mt-32">
-              <LoadingSpinner height={"32"} width={"32"} />
-            </div>
+            <div className="mx-auto mt-32 flex items-center justify-center">
+            <Loader
+              type="Puff"
+              color="#31C9AE"
+              height={100}
+              width={100}
+              timeout={5000}
+            />
+          </div>
           }
         >
           <NavSection />
