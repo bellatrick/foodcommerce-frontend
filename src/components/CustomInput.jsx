@@ -14,7 +14,7 @@
   }
   ```
 */
-export default function CustomInput({label, placeholder,type,name}) {
+export default function CustomInput({label, placeholder,type,name,onChange}) {
     return (
       <div className='mb-8'>
         <label htmlFor="email" className="sr-only">
@@ -22,6 +22,8 @@ export default function CustomInput({label, placeholder,type,name}) {
         </label>
         <input
           type={type}
+          onChange={onChange}
+          required
           name={name}
           id={name}
           className="shadow-sm  focus:ring-indigo-500 py-3 px-5 focus:border-green-500 block w-full sm:text-sm border border-gray-200 rounded-md"

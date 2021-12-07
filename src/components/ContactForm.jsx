@@ -22,6 +22,7 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     try{
       e.preventDefault();
+    
     setLoading(true);
     await postMessage();
     setLoading(false);
@@ -44,7 +45,7 @@ const ContactForm = () => {
       </p>
       <form onSubmit={handleSubmit} className="mb-10 px-8 md:px-56 lg:px-72">
         <CustomInput
-          name={"name"}
+          name="name"
           placeholder="Full Name"
           type={"text"}
           onChange={handleChange}
@@ -52,7 +53,7 @@ const ContactForm = () => {
           label={"Full Name"}
         />
         <CustomInput
-          name={"email"}
+          name="email"
           onChange={handleChange}
           placeholder="Email Address"
           type={"email"}

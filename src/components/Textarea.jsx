@@ -25,6 +25,7 @@ export default function Textarea({onChange,value}) {
             rows={8}
             name="message"
             id="comment"
+            required
             placeholder='Enter your message here'
             onChange={onChange}
             value={value}

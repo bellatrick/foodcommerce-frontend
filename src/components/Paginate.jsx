@@ -40,17 +40,17 @@ const Pagination = props => {
     >
        {/* Left navigation arrow */}
       <li
-       className={`${currentPage === 1?' bg-transparent hover:bg-transparent text-transparent':'text-white bg-gray-800 '}rounded-full mr-2 text-base font-bold px-1 hover:bg-primary`}
+       className={`${currentPage === 1?' bg-transparent hover:bg-transparent text-transparent':'text-white bg-gray-800 '}rounded-full mr-2 text-base font-bold px-1 `}
         onClick={onPrevious}
-        disable={currentPage===1}
+     
       >
         <ArrowBack/>
       </li>
-      {paginationRange.map(pageNumber => {
+      {paginationRange.map((pageNumber,i) => {
          
         // If the pageItem is a DOT, render the DOTS unicode character
         if (pageNumber === DOTS) {
-          return <li className="pagination-item dots">&#8230;</li>;
+          return <li key={i} className="pagination-item dots">&#8230;</li>;
         }
 		
         // Render our Page Pills
@@ -65,7 +65,7 @@ const Pagination = props => {
       })}
       {/*  Right Navigation arrow */}
       <li
-      className={`${currentPage === lastPage?'bg-transparent hover:bg-transparent':'bg-gray-800 '}rounded-full px-1 text-white hover:bg-primary`}
+      className={`${currentPage === lastPage?'bg-transparent hover:bg-transparent':'bg-gray-800 '}rounded-full px-1 text-white `}
         onClick={onNext}
       >
         <ArrowForward/>

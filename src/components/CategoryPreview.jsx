@@ -21,7 +21,7 @@ export default function CategoryPreview() {
     </div>
   );
   }
-  else
+
   return (
     <div className="bg-white">
       <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">

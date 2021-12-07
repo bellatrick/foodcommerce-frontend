@@ -10,11 +10,11 @@ import { FETCH_PRODUCTS_QUERY } from "../utils/Graphql";
 import { useEffect } from "react";
 const filterResults = (list, keyword) => {
   return list.filter((x) => {
-    const a = x?.name?.toLowerCase().split(" ");
-    const b = x?.desc?.toLowerCase().split(" ");
-    const c = x?.price?.toLowerCase().split(" ");
-    const d = x?.category?.toLowerCase().split(" ");
-    const arr = [...a, ...b, ...c, ...d];
+    const a = x?.name?.toLowerCase();
+    const b = x?.desc?.toLowerCase();
+    const c = x?.price?.toLowerCase();
+    const d = x?.category?.toLowerCase();
+    const arr = [a, b, c,d];
     return arr.some((word) => word.includes(keyword.toLowerCase()));
   });
 };
