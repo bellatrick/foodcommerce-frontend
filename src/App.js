@@ -7,12 +7,13 @@ import { ToastContainer } from "react-toastify";
 import NavSection from "./components/NavSection";
 import NotFound from "./pages/NotFound";
 import LoadingSpinner from "./components/LoadingSpinner";
+import CategoryView from './pages/CategoryView'
+import CategorySearch from './pages/CategorySearchList'
+import SearchList from './pages/SearchList'
 const Home = React.lazy(() => import("./pages/Home"));
 const ProductView = React.lazy(() => import("./pages/ProductView"));
 const Cart = React.lazy(() => import("./pages/Cart"));
-const CategoryView = React.lazy(() => import("./pages/CategoryView"));
-const CategorySearch = React.lazy(() => import("./pages/CategorySearchList"));
-const SearchList = React.lazy(() => import("./pages/SearchList"));
+
 function App() {
   return (
     <StoreProvider>
