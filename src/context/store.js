@@ -89,10 +89,22 @@ const reducer = (state, action) => {
 
 export const StoreProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, initalState);
-
+  const NGFormat = new Intl.NumberFormat(undefined, {
+    style: 'currency',
+    currency: 'NGN',
+  
+  
+  });
+  const EUFormat = new Intl.NumberFormat(undefined, {
+    style: 'currency',
+    currency: 'EUR',
+  
+  
+  });
   const value = {
     state,
     dispatch,
+    NGFormat,EUFormat
   };
   return <Store.Provider value={value}>{props.children}</Store.Provider>;
 };

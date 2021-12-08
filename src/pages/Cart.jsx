@@ -5,10 +5,10 @@ import Counter from "../components/Counter";
 import Modal from "../components/Modal";
 import { ShoppingCart } from "@material-ui/icons";
 import { useNavigate } from "react-router-dom";
-import Footer from '../components/Footer'
-export default function Example() {
-  const navigate=useNavigate()
-  const { dispatch, state } = useContext(Store);
+import Footer from "../components/Footer";
+export default function Cart() {
+  const navigate = useNavigate();
+  const { dispatch, state, NGFormat, EUFormat } = useContext(Store);
   const [open, setOpen] = useState(false);
   const [no1] = useState("+2348126953988");
   const [no2] = useState("+2348108932677");
@@ -32,35 +32,49 @@ export default function Example() {
       UKItems.length > 0
         ? UKItems.map(
             (item, i) =>
-              ` Item name__: ${item.name} -quantity__:${item.quantity} -price__:${item.price} `
+              ` Item name: ${item.name}${"  "} quantity: ${
+                item.quantity
+              }${"  "} price: ${EUFormat.format(item.price)}${"  "} `
           )
         : ""
     } ${
       NigeriaItems.length > 0
         ? NigeriaItems.map(
             (item, i) =>
-              `Item name__: ${item.name} -quantity__:${item.quantity} -price__:${item.price} `
+              `Item name: ${item.name}${"  "} quantity: ${
+                item.quantity
+              }${"  "} price: ${NGFormat.format( item.price)} ${"  "}`
           )
         : ""
     } Total amount of purchased item is ${
-      nigTotal ? `(items from Nigeria) ₦ ${nigTotal} ` : ""
-    } ${UKTotal ? `and (Items from the UK) € ${UKTotal} ` : ""}`;
+      nigTotal ? `(items from Nigeria) ${NGFormat.format(nigTotal)} ` : ""
+    } ${
+      UKTotal ? `and (Items from the UK)  ${EUFormat.format(UKTotal)} ` : ""
+    }`;
     setMessage(message);
-  }, [state.cart]);
+  }, [state.cart,EUFormat,NGFormat]);
 
   const handleSubmit = async () => {
     setOpen(true);
-    console.log(messageStr);
+ 
   };
   if (state.cart.length <= 0) {
     return (
-      <div className='flex items-center justify-center my-56'>
-        <div >
-          <ShoppingCart className='text-gray-400' style={{width:'100px', height:'100px'}} />
+      <div className="flex items-center justify-center my-56">
+        <div>
+          <ShoppingCart
+            className="text-gray-400"
+            style={{ width: "100px", height: "100px" }}
+          />
         </div>
         <div className="flex flex-col ml-8">
-          <p className='text-primary text-sm my-4 tracking-wider font-bold'>Your Shopping Cart is Empty</p>
-          <p onClick={()=>navigate('/')} className="py-2 bg-secondary text-center cursor-pointer hover:bg-primary text-white w-36 rounded">
+          <p className="text-primary text-sm my-4 tracking-wider font-bold">
+            Your Shopping Cart is Empty
+          </p>
+          <p
+            onClick={() => navigate("/")}
+            className="py-2 bg-secondary text-center cursor-pointer hover:bg-primary text-white w-36 rounded"
+          >
             Start Shopping
           </p>{" "}
         </div>
@@ -103,8 +117,8 @@ export default function Example() {
                         </div>
                         <p className="mt-1 text-sm font-medium text-gray-900">
                           {product.location === "UK"
-                            ? `€ ${product.price * product.quantity}`
-                            : `₦ ${product.price * product.quantity}`}
+                            ? EUFormat.format(product.price * product.quantity)
+                            : NGFormat.format(product.price * product.quantity)}
                         </p>
                         {product.inStock ? (
                           <div className="mt-20 flex text-sm">
@@ -162,18 +176,19 @@ export default function Example() {
                 id="summary-heading"
                 className="text-lg font-medium text-gray-900"
               >
-                 Order summary (Nigeria)
+                Order summary (Nigeria)
               </h2>
 
               <dl className="mt-6 space-y-4">
                 <div className="flex items-center justify-between">
                   <dt className="text-sm text-gray-600">Subtotal</dt>
                   <dd className="text-sm font-medium text-gray-900">
-                  ₦{" "}
-                    {state.cart
-                      .filter((item) => item.location === "Nigeria")
-                      .filter((item) => item.inStock === true)
-                      .reduce((a, c) => a + c.price * c.quantity, 0)}
+                    {NGFormat.format(
+                      state.cart
+                        .filter((item) => item.location === "Nigeria")
+                        .filter((item) => item.inStock === true)
+                        .reduce((a, c) => a + c.price * c.quantity, 0)
+                    )}
                   </dd>
                 </div>
                 <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
@@ -182,7 +197,7 @@ export default function Example() {
                     <div className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500"></div>
                   </dt>
                   <dd className="text-sm font-medium text-gray-900">
-                    {state.shippingData?.nigeriaToUK}
+                    {state.shippingData?NGFormat.format(state.shippingData?.nigeriaToUK):'Network error'}
                   </dd>
                 </div>
 
@@ -190,14 +205,19 @@ export default function Example() {
                   <dt className="text-base font-medium text-gray-900">
                     Order total
                   </dt>
-                {state.shippingData?  <dd className="text-base font-medium text-gray-900">
-                ₦{" "}
-                    {state.cart
-                      .filter((item) => item.location === "Nigeria")
-                      .filter((item) => item.inStock === true)
-                      .reduce((a, c) => a + c.price * c.quantity, 0) +
-                      +state.shippingData?.nigeriaToUK}
-                  </dd>:'Network is unavailable '}
+                  {state.shippingData ? (
+                    <dd className="text-base font-medium text-gray-900">
+                      {NGFormat.format(
+                        state.cart
+                          .filter((item) => item.location === "Nigeria")
+                          .filter((item) => item.inStock === true)
+                          .reduce((a, c) => a + c.price * c.quantity, 0) +
+                          +state.shippingData?.nigeriaToUK
+                      )}
+                    </dd>
+                  ) : (
+                    "Network is unavailable "
+                  )}
                 </div>
               </dl>
               <div>
@@ -209,19 +229,23 @@ export default function Example() {
                       id="summary-heading"
                       className="text-lg font-medium text-gray-900"
                     >
-                     Order summary (UK)
+                      Order summary (UK)
                     </h2>
 
                     <dl className="mt-6 space-y-4">
                       <div className="flex items-center justify-between">
                         <dt className="text-sm text-gray-600">Subtotal</dt>
-                     {state.shippingData?   <dd className="text-sm font-medium text-gray-900">
-                        €{" "}
-                          {state.cart
-                            .filter((item) => item.location === "UK")
-                            .filter((item) => item.inStock === true)
-                            .reduce((a, c) => a + c.price * c.quantity, 0)}
-                        </dd>:'Network error'}
+                        {
+                          <dd className="text-sm font-medium text-gray-900">
+                            {EUFormat.format(
+                              state.cart
+                                .filter((item) => item.location === "UK")
+                                .filter((item) => item.inStock === true)
+                                .reduce((a, c) => a + c.price * c.quantity, 0)
+                            )}
+                          </dd>
+                        
+                        }
                       </div>
                       <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                         <dt className="flex items-center text-sm text-gray-600">
@@ -229,7 +253,7 @@ export default function Example() {
                           <div className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500"></div>
                         </dt>
                         <dd className="text-sm font-medium text-gray-900">
-                          {state.shippingData.uKToNigeria}
+                          {state.shippingData?EUFormat.format(state.shippingData.uKToNigeria):"Network Error"}
                         </dd>
                       </div>
 
@@ -237,14 +261,19 @@ export default function Example() {
                         <dt className="text-base font-medium text-gray-900">
                           Order total
                         </dt>
-                      {state.shippingData?  <dd className="text-base font-medium text-gray-900">
-                        €{" "}
-                          {state.cart
-                            .filter((item) => item.location === "UK")
-                            .filter((item) => item.inStock === true)
-                            .reduce((a, c) => a + c.price * c.quantity, 0) +
-                            +state.shippingData.uKToNigeria}
-                        </dd>:'Network is unavailable'}
+                        {state.shippingData ? (
+                          <dd className="text-base font-medium text-gray-900">
+                            {EUFormat.format(
+                              state.cart
+                                .filter((item) => item.location === "UK")
+                                .filter((item) => item.inStock === true)
+                                .reduce((a, c) => a + c.price * c.quantity, 0) +
+                                +state.shippingData.uKToNigeria
+                            )}
+                          </dd>
+                        ) : (
+                          "Network is unavailable"
+                        )}
                       </div>
                     </dl>
                   </div>
@@ -274,7 +303,7 @@ export default function Example() {
         no2={no2}
         message={messageStr}
       />
-      <Footer/>
+      <Footer />
     </div>
   );
 }

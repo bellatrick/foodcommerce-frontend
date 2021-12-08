@@ -9,8 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { Store } from "../context/store";
 import {
   FETCH_CATEGORIES,
- 
-  FETCH_PRODUCTS_BY_LOCATION,
+  FETCH_PRODUCTS_QUERY,
+
   FETCH_SHIPPING,
 } from "../utils/Graphql";
 import { useQuery } from "@apollo/react-hooks";
@@ -22,9 +22,7 @@ export default function Example(props) {
   const [keyword, setKeyword] = useState("");
   const [category, setCategory] = useState("Category");
   const { data: shippingData } = useQuery(FETCH_SHIPPING);
-  const { loading, data } = useQuery(FETCH_PRODUCTS_BY_LOCATION, {
-    variables: { location: local ? "Nigeria" : "UK" },
-  });
+  const { loading, data } = useQuery(FETCH_PRODUCTS_QUERY );
  
 
   const { state, dispatch } = useContext(Store);
@@ -62,7 +60,7 @@ export default function Example(props) {
       if (data) {
         dispatch({
           type: "GET_PRODUCT_LIST",
-          payload: data.getProductByLocation,
+          payload: data.getAllProducts,
         });
         dispatch({ type: "PRODUCT_LIST_LOADING", payload: loading });
       }
