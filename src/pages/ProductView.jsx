@@ -91,7 +91,7 @@ const {dispatch,state} =useContext(Store)
 
             <div className="mt-3">
               <h2 className="sr-only">Product information</h2>
-              <p className="text-3xl text-gray-900">{state.product?.location==='UK'?`€ ${state.product?.price}`:`N ${state.product?.price}`}</p>
+              <p className="text-3xl text-gray-900">{state.product?.location==='UK'?`€ ${state.product?.price}`:`₦ ${state.product?.price}`}</p>
             </div>
 
             <div className="mt-6">

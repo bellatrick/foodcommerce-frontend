@@ -43,7 +43,7 @@ export default function Example() {
           )
         : ""
     } Total amount of purchased item is ${
-      nigTotal ? `(items from Nigeria) N${nigTotal} ` : ""
+      nigTotal ? `(items from Nigeria) ₦ ${nigTotal} ` : ""
     } ${UKTotal ? `and (Items from the UK) € ${UKTotal} ` : ""}`;
     setMessage(message);
   }, [state.cart]);
@@ -104,7 +104,7 @@ export default function Example() {
                         <p className="mt-1 text-sm font-medium text-gray-900">
                           {product.location === "UK"
                             ? `€ ${product.price * product.quantity}`
-                            : `N ${product.price * product.quantity}`}
+                            : `₦ ${product.price * product.quantity}`}
                         </p>
                         {product.inStock ? (
                           <div className="mt-20 flex text-sm">
@@ -169,7 +169,7 @@ export default function Example() {
                 <div className="flex items-center justify-between">
                   <dt className="text-sm text-gray-600">Subtotal</dt>
                   <dd className="text-sm font-medium text-gray-900">
-                    N{" "}
+                  ₦{" "}
                     {state.cart
                       .filter((item) => item.location === "Nigeria")
                       .filter((item) => item.inStock === true)
@@ -191,12 +191,12 @@ export default function Example() {
                     Order total
                   </dt>
                 {state.shippingData?  <dd className="text-base font-medium text-gray-900">
-                    N{" "}
+                ₦{" "}
                     {state.cart
                       .filter((item) => item.location === "Nigeria")
                       .filter((item) => item.inStock === true)
                       .reduce((a, c) => a + c.price * c.quantity, 0) +
-                      +state.shippingData?.nigeriaToUK?.substring(1)}
+                      +state.shippingData?.nigeriaToUK}
                   </dd>:'Network is unavailable '}
                 </div>
               </dl>
@@ -221,7 +221,7 @@ export default function Example() {
                             .filter((item) => item.location === "UK")
                             .filter((item) => item.inStock === true)
                             .reduce((a, c) => a + c.price * c.quantity, 0)}
-                        </dd>:'Netowrk error'}
+                        </dd>:'Network error'}
                       </div>
                       <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                         <dt className="flex items-center text-sm text-gray-600">
@@ -243,7 +243,7 @@ export default function Example() {
                             .filter((item) => item.location === "UK")
                             .filter((item) => item.inStock === true)
                             .reduce((a, c) => a + c.price * c.quantity, 0) +
-                            +state.shippingData.uKToNigeria?.substring(1)}
+                            +state.shippingData.uKToNigeria}
                         </dd>:'Network is unavailable'}
                       </div>
                     </dl>

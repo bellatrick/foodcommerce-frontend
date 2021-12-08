@@ -98,7 +98,7 @@ export default function Example() {
                     <p className="relative text-sm font-semibold text--gray-900">
                       {product.location === "UK"
                         ? `€${product.price}`
-                        : `N${product.price}`}
+                        : `₦${product.price}`}
                     </p>
                   </div>
                 </div>
