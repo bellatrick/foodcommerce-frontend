@@ -5,25 +5,25 @@ import { ShoppingCart, ExpandMore } from "@material-ui/icons";
 import { MenuIcon, XIcon } from "@heroicons/react/outline";
 import Uk from "../assets/Uk.png";
 import Nig from "../assets/Nigeria.png";
+import logo from "../assets/blue.png";
 import { useNavigate } from "react-router-dom";
 import { Store } from "../context/store";
 import {
   FETCH_CATEGORIES,
   FETCH_PRODUCTS_QUERY,
-
   FETCH_SHIPPING,
 } from "../utils/Graphql";
 import { useQuery } from "@apollo/react-hooks";
 
 import { useEffect } from "react";
-export default function Example(props) {
-  const {loading:loadingCat, data: categoryData } = useQuery(FETCH_CATEGORIES);
+export default function Example() {
+  const { loading: loadingCat, data: categoryData } =
+    useQuery(FETCH_CATEGORIES);
   const [local, setLocal] = useState(true);
   const [keyword, setKeyword] = useState("");
   const [category, setCategory] = useState("Category");
   const { data: shippingData } = useQuery(FETCH_SHIPPING);
-  const { loading, data } = useQuery(FETCH_PRODUCTS_QUERY );
- 
+  const { loading, data } = useQuery(FETCH_PRODUCTS_QUERY);
 
   const { state, dispatch } = useContext(Store);
   const navigate = useNavigate();
@@ -34,19 +34,17 @@ export default function Example(props) {
   };
   const handleToggleLocal = () => {
     setLocal(!local);
-    dispatch({type:'SET_LOCAL', payload:local})
+    dispatch({ type: "SET_LOCAL", payload: local });
   };
   const handleViewCart = () => {
     navigate("/cart");
   };
   const handleGoHome = () => {
     navigate("/");
-   
   };
   const handleSearchProduct = (e) => {
     e.preventDefault();
-    keyword.trim().length>0 &&  navigate(`/search`);
-  
+    keyword.trim().length > 0 && navigate(`/search`);
   };
 
   useEffect(() => {
@@ -55,30 +53,28 @@ export default function Example(props) {
     }
     if (categoryData) {
       dispatch({ type: "GET_CATEGORIES", payload: categoryData.getCategory });
-      dispatch({type:'CATEGORY_PREVIEW_LOADING',payload:loadingCat})
+      dispatch({ type: "CATEGORY_PREVIEW_LOADING", payload: loadingCat });
     }
-      if (data) {
-        dispatch({
-          type: "GET_PRODUCT_LIST",
-          payload: data.getAllProducts,
-        });
-        dispatch({ type: "PRODUCT_LIST_LOADING", payload: loading });
-      }
-    
-  }, [dispatch, categoryData, data, loading, shippingData,loadingCat]);
+    if (data) {
+      dispatch({
+        type: "GET_PRODUCT_LIST",
+        payload: data.getAllProducts,
+      });
+      dispatch({ type: "PRODUCT_LIST_LOADING", payload: loading });
+    }
+  }, [dispatch, categoryData, data, loading, shippingData, loadingCat]);
   return (
     <>
       <Popover className="top-0 left-0 z-10 bg-secondary shadow sticky">
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           <div className="flex justify-between items-center py-2 md:justify-start md:space-x-10">
-            <div onClick={handleGoHome} className="hidden md:flex justify-start lg:w-0 lg:flex-1">
-              <div >
+            <div
+              onClick={handleGoHome}
+              className="hidden md:flex justify-start lg:w-0 lg:flex-1"
+            >
+              <div>
                 <span className="sr-only">Workflow</span>
-                <img
-                  className="h-8 w-auto sm:h-10"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                  alt=""
-                />
+                <img className="h-20 w-auto sm:h-20" src={logo} alt="" />
               </div>
             </div>
             <div className="-mr-2 -my-2 md:hidden">
@@ -187,11 +183,7 @@ export default function Example(props) {
               <div className="pt-5 mb-6 px-5">
                 <div className="flex items-center justify-between">
                   <div onClick={handleGoHome}>
-                    <img
-                      className="h-8 w-auto"
-                      src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
-                      alt="Workflow"
-                    />
+                    <img className="h-8 w-auto" src={logo} alt="Workflow" />
                   </div>
                   <div className="-mr-2">
                     <Popover.Button className="bg-primary rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
@@ -268,13 +260,13 @@ export default function Example(props) {
                 </div>
                 <div className="border border-t-2 border-green-600" />
                 <div className="mb-32 px-16">
-                <SearchInput
-                setCategory={setCategory}
-                category={category}
-                handleSearchProduct={handleSearchProduct}
-                keyword={keyword}
-                setKeyword={setKeyword}
-              />
+                  <SearchInput
+                    setCategory={setCategory}
+                    category={category}
+                    handleSearchProduct={handleSearchProduct}
+                    keyword={keyword}
+                    setKeyword={setKeyword}
+                  />
                 </div>
               </div>
             </div>

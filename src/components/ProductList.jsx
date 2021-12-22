@@ -4,9 +4,9 @@ import { Store } from "../context/store";
 import { toast } from "react-toastify";
 import { useContext, useMemo, useState } from "react";
 import Counter from "../components/Counter";
-import Loader from "react-loader-spinner";
 
 import Paginate from "../components/Paginate";
+import load from '../assets/loader.gif'
 let PageSize = 8;
 export default function Example() {
   const { dispatch, state, NGFormat, EUFormat } = useContext(Store);
@@ -60,13 +60,8 @@ export default function Example() {
   ) {
     return (
       <div className="mx-auto mt-32 py-5 flex items-center justify-center">
-        <Loader
-          type="Puff"
-          color="#31C9AE"
-          height={100}
-          width={100}
-          timeout={10000}
-        />
+      
+         <img src={load} alt="loader" />
       </div>
     );
   } else if (

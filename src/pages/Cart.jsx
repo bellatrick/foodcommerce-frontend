@@ -10,8 +10,8 @@ export default function Cart() {
   const navigate = useNavigate();
   const { dispatch, state, NGFormat, EUFormat } = useContext(Store);
   const [open, setOpen] = useState(false);
-  const [no1] = useState("+2348126953988");
-  const [no2] = useState("+2348108932677");
+  const [no1] = useState("+2348136181659");
+  const [no2] = useState("+447588067218");
   const [messageStr, setMessage] = useState();
   const handleAddToCart = (item) => {
     dispatch({ type: "CART_ADD_ITEM", payload: { ...item, quantity: 1 } });
@@ -43,7 +43,7 @@ export default function Cart() {
             (item, i) =>
               `Item name: ${item.name}${"  "} quantity: ${
                 item.quantity
-              }${"  "} price: ${NGFormat.format( item.price)} ${"  "}`
+              }${"  "} price: ${NGFormat.format(item.price)} ${"  "}`
           )
         : ""
     } Total amount of purchased item is ${
@@ -52,11 +52,10 @@ export default function Cart() {
       UKTotal ? `and (Items from the UK)  ${EUFormat.format(UKTotal)} ` : ""
     }`;
     setMessage(message);
-  }, [state.cart,EUFormat,NGFormat]);
+  }, [state.cart, EUFormat, NGFormat]);
 
   const handleSubmit = async () => {
     setOpen(true);
- 
   };
   if (state.cart.length <= 0) {
     return (
@@ -197,7 +196,9 @@ export default function Cart() {
                     <div className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500"></div>
                   </dt>
                   <dd className="text-sm font-medium text-gray-900">
-                    {state.shippingData?NGFormat.format(state.shippingData?.nigeriaToUK):'Network error'}
+                    {state.shippingData
+                      ? NGFormat.format(state.shippingData?.nigeriaToUK)
+                      : "Network error"}
                   </dd>
                 </div>
 
@@ -244,7 +245,6 @@ export default function Cart() {
                                 .reduce((a, c) => a + c.price * c.quantity, 0)
                             )}
                           </dd>
-                        
                         }
                       </div>
                       <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
@@ -253,7 +253,9 @@ export default function Cart() {
                           <div className="ml-2 flex-shrink-0 text-gray-400 hover:text-gray-500"></div>
                         </dt>
                         <dd className="text-sm font-medium text-gray-900">
-                          {state.shippingData?EUFormat.format(state.shippingData.uKToNigeria):"Network Error"}
+                          {state.shippingData
+                            ? EUFormat.format(state.shippingData.uKToNigeria)
+                            : "Network Error"}
                         </dd>
                       </div>
 

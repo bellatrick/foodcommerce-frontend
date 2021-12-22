@@ -6,11 +6,12 @@ import "./App.css";
 import { ToastContainer } from "react-toastify";
 import NavSection from "./components/NavSection";
 import NotFound from "./pages/NotFound";
-import Loader from "react-loader-spinner";
-import CategoryView from './pages/CategoryView'
-import CategorySearch from './pages/CategorySearchList'
-import SearchList from './pages/SearchList'
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+// import Loader from "react-loader-spinner";
+import CategoryView from "./pages/CategoryView";
+import CategorySearch from "./pages/CategorySearchList";
+import SearchList from "./pages/SearchList";
+// import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import loader from "./assets/loader.gif";
 const Home = React.lazy(() => import("./pages/Home"));
 const ProductView = React.lazy(() => import("./pages/ProductView"));
 const Cart = React.lazy(() => import("./pages/Cart"));
@@ -22,14 +23,15 @@ function App() {
         <Suspense
           fallback={
             <div className="mx-auto mt-32 flex items-center justify-center">
-            <Loader
+              <img src={loader} alt="loader" />
+              {/* <Loader
               type="Puff"
               color="#31C9AE"
               height={100}
               width={100}
               timeout={10000}
-            />
-          </div>
+            /> */}
+            </div>
           }
         >
           <NavSection />

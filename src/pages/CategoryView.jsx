@@ -2,8 +2,7 @@
 import {Store} from '../context/store'
 import {useContext} from 'react'
 import {useNavigate} from 'react-router-dom'
-
-import LoadingSpinner from "../components/LoadingSpinner";
+import load from '../assets/loader.gif'
 export default function ProductList() {
   const navigate=useNavigate()
 const {state,dispatch}=useContext(Store)
@@ -20,7 +19,7 @@ if(!state.categoryPreviewLoading && !state.categories){
 if(state.categoryPreviewLoading || !state.categories){
   return (
  <div className="mx-auto my-16 sm:my-32">
-   <LoadingSpinner height={"16"} width={"16"} />
+  <img src={load} alt=''/>
  </div>
 );
 }

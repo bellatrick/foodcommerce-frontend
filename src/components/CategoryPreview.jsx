@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Store } from "../context/store";
 import { useContext } from "react";
-import LoadingSpinner from "../components/LoadingSpinner";
+import load from '../assets/loader.gif'
 export default function CategoryPreview() {
   const { state, dispatch } = useContext(Store);
 
@@ -16,8 +16,8 @@ export default function CategoryPreview() {
   };
   if(state.categoryPreviewLoading || !state.categories){
      return (
-    <div className="mx-auto my-40">
-      <LoadingSpinner height={"32"} width={"32"} />
+    <div className="mx-auto my-32 flex items-center justify-center ">
+<img src={load} alt=''/>
     </div>
   );
   }
