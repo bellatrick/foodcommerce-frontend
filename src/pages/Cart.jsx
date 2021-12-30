@@ -3,9 +3,10 @@ import { useState, useContext, useEffect } from "react";
 import { Store } from "../context/store";
 import Counter from "../components/Counter";
 import Modal from "../components/Modal";
-import { ShoppingCart } from "@material-ui/icons";
+
 import { useNavigate } from "react-router-dom";
 import Footer from "../components/Footer";
+import cartanime from '../assets/cart.gif'
 export default function Cart() {
   const navigate = useNavigate();
   const { dispatch, state, NGFormat, EUFormat } = useContext(Store);
@@ -28,7 +29,7 @@ export default function Cart() {
       .filter((item) => item.inStock === true);
     const nigTotal = NigeriaItems.reduce((a, b) => a + b.price * b.quantity, 0);
     const UKTotal = UKItems.reduce((a, b) => a + b.price * b.quantity, 0);
-    const message = `Hello I just finished shopping from your website and I purchased the following items. ${
+    const message = `Hello I just made an order on your website. Please send me your account details and I would send you the recipient's details. I purchased the following items. ${
       UKItems.length > 0
         ? UKItems.map(
             (item, i) =>
@@ -59,23 +60,23 @@ export default function Cart() {
   };
   if (state.cart.length <= 0) {
     return (
-      <div className="flex items-center justify-center my-56">
+      <div className="flex flex-col md:flex-row items-center justify-center my-20">
         <div>
-          <ShoppingCart
-            className="text-gray-400"
-            style={{ width: "100px", height: "100px" }}
-          />
+          <img src={cartanime} alt='' style={{ width: "400px", height: "400px" }}/>
+      
         </div>
-        <div className="flex flex-col ml-8">
-          <p className="text-primary text-sm my-4 tracking-wider font-bold">
+        <div className="flex flex-col">
+          <p className="text-gray-500 text-lg my-4 tracking-wider font-bold">
             Your Shopping Cart is Empty
           </p>
-          <p
+       <div className='flex items-center justify-center'>
+       <p
             onClick={() => navigate("/")}
-            className="py-2 bg-secondary text-center cursor-pointer hover:bg-primary text-white w-36 rounded"
+            className="py-2  bg-secondary text-center cursor-pointer hover:bg-primary text-white w-36 rounded"
           >
             Start Shopping
           </p>{" "}
+       </div>
         </div>
       </div>
     );
