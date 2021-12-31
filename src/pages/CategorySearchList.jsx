@@ -4,7 +4,7 @@ import { Store } from "../context/store";
 import { toast } from "react-toastify";
 import { useContext, useEffect } from "react";
 import Counter from "../components/Counter";
-import Loader from "react-loader-spinner";
+import load from '../assets/loader.gif'
 import { FETCH_PRODUCTS_BY_CATEGORY } from "../utils/Graphql";
 import { useQuery } from "@apollo/react-hooks";
 
@@ -46,13 +46,7 @@ export default function Example() {
   if (loading || !state.categorySearch) {
     return (
       <div className="mx-auto mt-32 flex items-center justify-center">
-      <Loader
-        type="Puff"
-        color="#31C9AE"
-        height={100}
-        width={100}
-        timeout={5000}
-      />
+    <img src={load} alt=''/>
     </div>
     );
   } else if (!loading && !state.categorySearch) {

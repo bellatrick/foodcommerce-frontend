@@ -1,9 +1,10 @@
 import React from "react";
 import { Fragment, useRef } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-import { InboxIcon } from "@heroicons/react/outline";
+
 import Uk from "../assets/Uk.png";
 import Nig from "../assets/Nigeria.png";
+import wme from '../assets/wme.png'
 export default function Modal({ open, setOpen, no1, no2, message }) {
   const cancelButtonRef = useRef(null);
 
@@ -46,11 +47,8 @@ export default function Modal({ open, setOpen, no1, no2, message }) {
           >
             <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div>
-                <div className="mx-auto animate-pulse flex items-center justify-center h-12 w-12 rounded-full bg-primary">
-                  <InboxIcon
-                    className="h-6 w-6 text-gray-300"
-                    aria-hidden="true"
-                  />
+                <div className="mx-auto animate-pulse flex items-center justify-center h-12 w-12 rounded-full bg-transparent">
+                 <img src={wme} alt=''className='w-10 h-10'/>
                 </div>
                 <div className="mt-3 text-center sm:mt-5">
                   <Dialog.Title
