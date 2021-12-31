@@ -58,7 +58,7 @@ export default function Modal({ open, setOpen, no1, no2, message }) {
                   ></Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-primary font-bold text-center">
-                      Please Select one of these numbers to contact the seller
+                      Please select one of these numbers to contact the seller
                       on Whatsapp
                     </p>
                   </div>
