@@ -17,7 +17,8 @@ const initalState = {
   shippingData: false,
   categoryPreviewLoading: false,
   local: "Nigeria",
-  keyword:''
+  keyword:'',
+  currentPage:1
 };
 
 const reducer = (state, action) => {
@@ -82,6 +83,8 @@ const reducer = (state, action) => {
     }
     case "PRODUCT_LIST_LOADING":
       return { ...state, productListLoading: action.payload };
+      case 'CHANGE_PAGE':
+        return {...state, currentPage:action.payload}
     default:
       return state;
   }

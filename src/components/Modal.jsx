@@ -4,7 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 
 import Uk from "../assets/Uk.png";
 import Nig from "../assets/Nigeria.png";
-import wme from '../assets/wme.png'
+import wme from "../assets/wme.png";
 export default function Modal({ open, setOpen, no1, no2, message }) {
   const cancelButtonRef = useRef(null);
 
@@ -48,7 +48,7 @@ export default function Modal({ open, setOpen, no1, no2, message }) {
             <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div>
                 <div className="mx-auto animate-pulse flex items-center justify-center h-12 w-12 rounded-full bg-transparent">
-                 <img src={wme} alt=''className='w-10 h-10'/>
+                  <img src={wme} alt="" className="w-10 h-10" />
                 </div>
                 <div className="mt-3 text-center sm:mt-5">
                   <Dialog.Title
@@ -58,14 +58,14 @@ export default function Modal({ open, setOpen, no1, no2, message }) {
                   ></Dialog.Title>
                   <div className="mt-2">
                     <p className="text-sm text-primary font-bold text-center">
-                      Please select one of these numbers to contact the seller
-                      on Whatsapp
+                      Please select one of the button below to contact the
+                      seller on Whatsapp
                     </p>
                   </div>
                 </div>
               </div>
               <div className="mt-5 flex flex-col px-4 sm:px-16">
-                <div>
+                <div className="w-64 mx-auto">
                   <a
                     href={`https://wa.me/${no1}/?text=${message}`}
                     rel="noreferrer"
@@ -74,10 +74,10 @@ export default function Modal({ open, setOpen, no1, no2, message }) {
                   >
                     {" "}
                     <img src={Nig} alt="" className="mr-3" />
-                    {no1} <div className="ml-4 w-6"></div>
+                    Nigeria <div className="ml-4 w-6"></div>
                   </a>
                 </div>
-                <div>
+                <div className="w-64 mx-auto">
                   <a
                     href={`https://wa.me/${no2}/?text=${message}`}
                     rel="noreferrer"
@@ -88,7 +88,7 @@ export default function Modal({ open, setOpen, no1, no2, message }) {
                   >
                     {" "}
                     <img src={Uk} alt="" className="mr-3" />
-                    {no2} <div className="ml-4  w-6"></div>
+                    UK <div className="ml-4  w-6"></div>
                   </a>
                 </div>
               </div>

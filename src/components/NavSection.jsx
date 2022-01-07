@@ -35,6 +35,7 @@ export default function Example() {
   const handleToggleLocal = () => {
     setLocal(!local);
     dispatch({ type: "SET_LOCAL", payload: local });
+    dispatch({type:'CHANGE_PAGE', payload:1})
   };
   const handleViewCart = () => {
     navigate("/cart");

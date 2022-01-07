@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { ShoppingCart, Report } from "@material-ui/icons";
 import { Store } from "../context/store";
 import { toast } from "react-toastify";
-import { useContext, useMemo, useState } from "react";
+import { useContext, useMemo } from "react";
 import Counter from "../components/Counter";
 
 import Paginate from "../components/Paginate";
@@ -10,9 +10,9 @@ import load from '../assets/loader.gif'
 let PageSize = 8;
 export default function Example() {
   const { dispatch, state, NGFormat, EUFormat } = useContext(Store);
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
   const currentData = useMemo(() => {
-    const firstPageIndex = (currentPage - 1) * PageSize;
+    const firstPageIndex = (state.currentPage - 1) * PageSize;
     const lastPageIndex = firstPageIndex + PageSize;
     if (
       state.productList &&
@@ -33,7 +33,7 @@ export default function Example() {
     ) {
       return state.productList &&  state.productList.filter((category) => category.location === state.local);
     }
-  }, [currentPage, state?.productList, state.local]);
+  }, [state.currentPage, state?.productList, state.local]);
 
   const navigate = useNavigate();
   const handleViewProduct = (product) => {
@@ -150,10 +150,10 @@ export default function Example() {
           </div>
           <Paginate
             className="flex items-center justify-center"
-            currentPage={currentPage}
+            currentPage={state.currentPage}
             totalCount={ state.productList.filter((category) => category.location === state.local).length}
             pageSize={PageSize}
-            onPageChange={(page) => setCurrentPage(page)}
+            onPageChange={(page) => dispatch({type:'CHANGE_PAGE', payload:page})}
           />
         </div>
       </div>
