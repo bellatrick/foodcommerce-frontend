@@ -100,7 +100,7 @@ export const StoreProvider = (props) => {
   });
   const EUFormat = new Intl.NumberFormat(undefined, {
     style: 'currency',
-    currency: 'EUR',
+    currency: 'GBP',
   
   
   });
