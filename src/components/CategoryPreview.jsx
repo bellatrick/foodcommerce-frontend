@@ -56,7 +56,7 @@ export default function CategoryPreview() {
                     </span>
                     <span
                       aria-hidden="true"
-                      className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-primary opacity-100"
+                      className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-primary opacity-100"
                     />
                     <span className="relative mt-auto text-center text-xl font-bold text-white">
                       {category?.name}
