@@ -24,7 +24,7 @@ export default function CategoryPreview() {
 
   return (
     <div className="bg-white">
-      <div className="py-16 sm:py-24 xl:max-w-7xl xl:mx-auto xl:px-8">
+      <div className="py-4 sm:py-8 xl:max-w-7xl xl:mx-auto xl:px-2">
         <div className="px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0">
           <h2 className="text-3xl font-extrabold font-heading text-gray-800">
             Shop by Category
@@ -45,7 +45,7 @@ export default function CategoryPreview() {
                   <div
                     key={i}
                     onClick={() => handleViewProducts(category.name)}
-                    className="relative w-56 h-80 rounded-lg  p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto"
+                    className="relative w-56 h-56 rounded-full  p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto"
                   >
                     <span aria-hidden="true" className="absolute inset-0">
                       <img

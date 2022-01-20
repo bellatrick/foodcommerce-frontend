@@ -79,7 +79,7 @@ export default function Example() {
               </div>
             </div>
             <div className="-mr-2 -my-2 md:hidden">
-              <Popover.Button className="bg-secondary rounded-md p-2 inline-flex items-center justify-center text-white hover:text-gray-50 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
+              <Popover.Button className="bg-secondary rounded-md p-2 inline-flex items-center justify-center text-white hover:text-gray-50 hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                 <span className="sr-only">Open menu</span>
                 <MenuIcon className="h-6 w-6" aria-hidden="true" />
               </Popover.Button>
@@ -159,7 +159,7 @@ export default function Example() {
                 <div className="whitespace-nowrap text-base font-medium text-gray-50 cursor-pointer hover:text-gray-100">
                   <ShoppingCart style={{ height: "30px", width: "30px" }} />
                 </div>
-                <p className="ml-8 whitespace-nowrap inline-flex items-center justify-center border border-transparent h-8 w-8 rounded-full shadow-sm text-base font-medium text-white bg-gray-900 hover:bg-green-700">
+                <p className="ml-8 whitespace-nowrap inline-flex items-center justify-center border border-transparent h-8 w-8 rounded-full shadow-sm text-base font-medium text-white bg-gray-900 hover:bg-blue-700">
                   {state.cart.length}
                 </p>
               </div>
@@ -180,14 +180,14 @@ export default function Example() {
             focus
             className="absolute top-0 inset-x-0 z-10 p-2 transition transform origin-top-right md:hidden"
           >
-            <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-primary divide-y-2 divide-green-600">
+            <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-primary divide-y-2 divide-blue-600">
               <div className="pt-5 mb-6 px-5">
                 <div className="flex items-center justify-between">
                   <div onClick={handleGoHome}>
                   <img className="h-20 w-auto sm:h-20" src={logo} alt="" />
                   </div>
                   <div className="-mr-2">
-                    <Popover.Button className="bg-primary rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-green-500">
+                    <Popover.Button className="bg-primary rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                       <span className="sr-only">Close menu</span>
                       <XIcon className="h-6 w-6" aria-hidden="true" />
                     </Popover.Button>
@@ -259,7 +259,7 @@ export default function Example() {
                     )}
                   </div>
                 </div>
-                <div className="border border-t-2 border-green-600" />
+                <div className="border border-t-2 border-blue-600" />
                 <div className="mb-32 px-16">
                   <SearchInput
                     setCategory={setCategory}

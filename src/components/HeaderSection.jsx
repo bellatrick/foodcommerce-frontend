@@ -1,36 +1,36 @@
-import headerimg from "../assets/headerimg.png";
-
-import img2 from "../assets/img2.png";
+import img9 from "../assets/img9.png";
+import img12 from '../assets/img12.png'
+import img7 from "../assets/img7.png";
 import img3 from "../assets/img3.png";
-import img4 from "../assets/img4.png";
-import img5 from "../assets/img5.png";
+import img10 from "../assets/img10.png";
 import img6 from "../assets/img6.png";
 import Carousel from "react-material-ui-carousel";
 export default function HeaderSection() {
   const items = [
     {
-      name: headerimg,
-      title: "All You Need To Buy",
+      name: img12,
+      title: "All You Need To Buy!",
     },
+   
     {
-      name: img6,
-      title: "All You Need In The Kitchen",
-    },
-    {
-      name: img2,
-      title: "Shop With Us",
+      name: img7,
+      title: "Groceries Shopping",
     },
     {
       name: img3,
-      title: "Buy More Pay Less",
+      title: "Buy More, Pay Less!",
     },
     {
-      name: img4,
-      title: "Shop In Nigeria or UK",
+      name: img6,
+      title: "All You Need In Your Wardrobe",
     },
     {
-      name: img5,
-      title: "All You Need To Buy",
+      name: img9,
+      title: "For All Your Party Needs!",
+    },
+    {
+      name: img10,
+      title: "Mobile Gadgets",
     },
   ];
   return (
@@ -57,14 +57,13 @@ export default function HeaderSection() {
                   </span>{" "}
                 </h1>
                 <p className="mt-3 max-w-md mx-auto text-lg text-white sm:text-xl md:mt-5 md:max-w-3xl">
-                  We are certified to deliver your products with lightening
-                  speed and at a reasonable price.
+                We reduce your stress at a very good price by helping you with providing goods and rendering services.
                 </p>
                 <div className="mt-10 sm:flex sm:justify-center lg:justify-start px-16">
                   <div className="rounded-md shadow">
                     <a
                       href="#productlist"
-                      className=" flex items-center justify-center  sm:px-16 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-700 md:py-2 md:text-lg md:px-6"
+                      className=" flex items-center justify-center  sm:px-16 py-2 border border-transparent text-base font-medium rounded-md text-white bg-gray-900 hover:bg-secondary md:py-2 md:text-lg md:px-6"
                     >
                       Shop Now
                     </a>

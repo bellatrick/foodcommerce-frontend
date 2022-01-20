@@ -1,22 +1,19 @@
-
 module.exports = {
-  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  purge: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      colors:{
-        primary:"#037662",
-        secondary:"#31C9AE"
+      colors: {
+        primary: "#004182",
+        secondary: "#0A66C2",
       },
-       fontFamily:{
-      'heading': ['Kavoon', 'cursive'],
-    }
+      fontFamily: {
+        heading: ["Kavoon", "cursive"],
+      },
     },
   },
   variants: {
-    extend: {
-     
-    },
+    extend: {},
   },
-  plugins: [require('tailwind-scrollbar-hide')],
-}
+  plugins: [require("tailwind-scrollbar-hide")],
+};

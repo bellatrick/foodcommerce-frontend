@@ -110,7 +110,7 @@ export default function Example() {
                       className="mt-6"
                       onClick={() => handleAddToCart(product)}
                     >
-                      <div className="relative  flex bg-secondary border border-transparent rounded-md py-2 mx-10 cursor-pointer px-8 items-center justify-center text-sm font-medium text-white hover:bg-green-800">
+                      <div className="relative  flex bg-secondary border border-transparent rounded-md py-2 mx-10 cursor-pointer px-8 items-center justify-center text-sm font-medium text-white hover:bg-primary">
                         <ShoppingCart className="mr-5" /> Add To Cart
                         <span className="sr-only">, {product.name}</span>
                       </div>
