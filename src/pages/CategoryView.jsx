@@ -19,23 +19,23 @@ if(!state.categoryPreviewLoading && !state.categories){
 if(state.categoryPreviewLoading || !state.categories){
   return (
  <div className="mx-auto my-16 sm:my-32">
-  <img src={load} alt=''/>
+  <img src={load} alt='' className="w-40 h-40"/>
  </div>
 );
 }
   return (
     <div className="bg-white relative">
-      <div className=" py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+      <div className=" py-16 px-2 sm:py-24 sm:px-6 lg:px-8">
         <h2 className="text-3xl text-start  font-extrabold font-heading tracking-tight text-gray-900">
           Categories
         </h2>
 
-        <div className="mt-8 items-center  grid grid-cols-2 gap-y-6 sm:grid-cols-2 md:grid-cols-3 sm:gap-x-4 lg:grid-cols-4 xl:grid-cols-6 xl:gap-x-4">
+        <div className="mt-8 items-center grid grid-cols-2 gap-y-6 sm:grid-cols-3  md:grid-cols-4 sm:gap-x-4 lg:grid-cols-5 xl:grid-cols-6 xl:gap-x-4">
                   {state.categories.map((category) => (
                     <div
                       key={category?.name}
                      onClick={()=>handleViewProducts(category.name)}
-                      className="relative  mx-16 sm:mx-0 w-40 h-40 rounded-full  p-6 flex flex-col overflow-hidden hover:opacity-75"
+                      className="relative w-32 h-32 sm:w-40 sm:h-40 rounded-full  p-6 flex flex-col overflow-hidden hover:opacity-75"
                     >
                       <span aria-hidden="true" className="absolute inset-0">
                         <img src={category?.image} alt="" className="w-full h-full object-center object-cover" />
