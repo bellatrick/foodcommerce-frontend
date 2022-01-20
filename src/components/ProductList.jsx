@@ -65,7 +65,7 @@ export default function Example() {
   ) {
     return (
       <div className="mx-auto mt-32 py-5 flex items-center justify-center">
-        <img src={load} alt="loader" />
+        <img src={load} alt="loader" className="w-40 h-40" />
       </div>
     );
   } else if (
@@ -81,7 +81,7 @@ export default function Example() {
   } else
     return (
       <div className="bg-white" id="productlist">
-        <div className=" mx-auto py-2 px-4 sm:py-8 sm:px-6 lg:px-8">
+        <div className=" mx-auto py-8 px-4  mb-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-heading font-bold text-gray-800">
             Browse Our Products
           </h2>

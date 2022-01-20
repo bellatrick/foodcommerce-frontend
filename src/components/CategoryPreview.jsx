@@ -17,14 +17,14 @@ export default function CategoryPreview() {
   if(state.categoryPreviewLoading || !state.categories){
      return (
     <div className="mx-auto my-32 flex items-center justify-center ">
-<img src={load} alt=''/>
+<img src={load} alt='' className="w-40 h-40"/>
     </div>
   );
   }
 
   return (
     <div className="bg-white">
-      <div className="py-4 sm:py-8 xl:max-w-7xl xl:mx-auto xl:px-2">
+      <div className="pt-4 sm:pt-8 xl:max-w-7xl xl:mx-auto xl:px-2">
         <div className="px-4 sm:px-6 sm:flex sm:items-center sm:justify-between lg:px-8 xl:px-0">
           <h2 className="text-3xl font-extrabold font-heading text-gray-800">
             Shop by Category
@@ -39,13 +39,13 @@ export default function CategoryPreview() {
 
         <div className="mt-4 flow-root">
           <div className="-my-2">
-            <div className="box-content py-2 relative h-80 overflow-x-auto xl:overflow-visible scrollbar-hide">
-              <div className="absolute min-w-screen-xl  px-4 flex space-x-8 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-5 xl:gap-x-8">
-                {state.categories.slice(0,5).map((category, i) => (
+            <div className="box-content py-2 relative h-56 overflow-x-auto xl:overflow-visible scrollbar-hide">
+              <div className="absolute min-w-screen-xl  px-4 flex space-x-4 sm:px-6 lg:px-8 xl:relative xl:px-0 xl:space-x-0 xl:grid xl:grid-cols-6 xl:gap-x-8">
+                {state.categories.slice(0,6).map((category, i) => (
                   <div
                     key={i}
                     onClick={() => handleViewProducts(category.name)}
-                    className="relative w-56 h-56 rounded-full  p-6 flex flex-col overflow-hidden hover:opacity-75 xl:w-auto"
+                    className="relative w-40 h-40 rounded-full  p-6 flex flex-col overflow-hidden hover:opacity-75 "
                   >
                     <span aria-hidden="true" className="absolute inset-0">
                       <img
@@ -68,7 +68,7 @@ export default function CategoryPreview() {
           </div>
         </div>
 
-        <div className="mt-6 px-4 sm:hidden">
+        <div className=" px-4 sm:hidden">
           <div  onClick={handleViewCategory} className="block cursor-pointer text-sm font-semibold text-black hover:text-primary">
             Browse all categories<span aria-hidden="true"> &rarr;</span>
           </div>

@@ -30,7 +30,7 @@ export default function HeaderSection() {
     },
     {
       name: img10,
-      title: "Mobile Gadgets",
+      title: "Buy Mobile Gadgets",
     },
   ];
   return (

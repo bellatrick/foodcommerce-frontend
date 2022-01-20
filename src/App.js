@@ -23,7 +23,7 @@ function App() {
         <Suspense
           fallback={
             <div className="mx-auto mt-32 flex items-center justify-center">
-              <img src={loader} alt="loader" />
+              <img src={loader} alt="loader" className="w-40 h-40"/>
               {/* <Loader
               type="Puff"
               color="#31C9AE"
