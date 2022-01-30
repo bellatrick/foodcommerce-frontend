@@ -35,7 +35,7 @@ export default function Example() {
   const handleToggleLocal = () => {
     setLocal(!local);
     dispatch({ type: "SET_LOCAL", payload: local });
-    dispatch({type:'CHANGE_PAGE', payload:1})
+    dispatch({ type: "CHANGE_PAGE", payload: 1 });
   };
   const handleViewCart = () => {
     navigate("/cart");
@@ -84,6 +84,9 @@ export default function Example() {
                 <MenuIcon className="h-6 w-6" aria-hidden="true" />
               </Popover.Button>
             </div>
+            <div onClick={handleGoHome}>
+                    <img className="h-20 w-auto sm:h-20 md:hidden" src={logo} alt="" />
+                  </div>
             <div className="hidden md:block">
               <SearchInput
                 setCategory={setCategory}
@@ -152,6 +155,7 @@ export default function Example() {
                   ""
                 )}
               </div>
+            
               <div
                 onClick={handleViewCart}
                 className="flex cursor-pointer items-center"
@@ -176,6 +180,9 @@ export default function Example() {
           leaveFrom="opacity-100 scale-100"
           leaveTo="opacity-0 scale-95"
         >
+          {/* <div onClick={handleGoHome}>
+            <img className="h-20 w-auto sm:h-20 md:hidden" src={logo} alt="" />
+          </div> */}
           <Popover.Panel
             focus
             className="absolute top-0 inset-x-0 z-10 p-2 transition transform origin-top-right md:hidden"
@@ -183,9 +190,6 @@ export default function Example() {
             <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 bg-primary divide-y-2 divide-blue-600">
               <div className="pt-5 mb-6 px-5">
                 <div className="flex items-center justify-between">
-                  <div onClick={handleGoHome}>
-                  <img className="h-20 w-auto sm:h-20" src={logo} alt="" />
-                  </div>
                   <div className="-mr-2">
                     <Popover.Button className="bg-primary rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                       <span className="sr-only">Close menu</span>
